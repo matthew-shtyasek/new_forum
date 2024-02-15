@@ -1,0 +1,8 @@
+
+.helptext, ul {
+    display: none;
+}
+
+.errorlist {
+    display: block;
+}

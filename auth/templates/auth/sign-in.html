@@ -1,7 +1,14 @@
 {% extends 'root.html' %}
+{% load static %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
+
 
 {% block content %}
-    <p><center>Sign-in</center></p>
+    <p>Sign-in</p>
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}

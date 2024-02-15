@@ -7,7 +7,6 @@ class CustomUserCreationForm(UserCreationForm):
 
         self.fields['username'].widget.attrs.update({'class': 'username-class'})
 
-        #self.fields -> {'username': <object Field>, 'password1': <object Field>, ...}
+        # self.fields -> {'username': <object Field>, 'password1': <object Field>, ...}
         for field in list(self.fields.values()):
             field.widget.attrs.update({'class': 'form-control'})
-

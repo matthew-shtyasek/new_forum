@@ -7,15 +7,15 @@
 {% endblock %}
 
 {% block content %}
-    <p>Sign-up</p>
+    <p>Регистрация</p>
     <form action="" method="post">
         {% csrf_token %}
         {% for field in form %}
-            <p>
+            <p class="col-sm-2 col-form-label">
                 <label for="{{ field.auto_id }}" class="form_control">{{ field.label }}</label>
                 {{ field }}
             </p>
         {% endfor %}
-        <input type="submit" value="Sign-up">
+        <input type="submit" class="btn btn-success" value="Регистрация">
     </form>
 {% endblock %}

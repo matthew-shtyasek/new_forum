@@ -8,10 +8,15 @@
 
 
 {% block content %}
-    <p>Sign-in</p>
+    <p>Вход</p>
     <form action="" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Sign-in">
+        {% for field in form %}
+            <p class="col-sm-2 col-form-label">
+                <label for="{{ field.auto_id }}" class="form_control">{{ field.label }}</label>
+                {{ field }}
+            </p>
+        {% endfor %}
+        <input class="btn btn-success" type="submit" value="Вход">
     </form>
 {% endblock %}

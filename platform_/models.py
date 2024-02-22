@@ -4,6 +4,10 @@ from django.db import models
 
 class Partition(models.Model):
     name = models.CharField(max_length=255, blank=False, verbose_name='Название')
+    visible = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Category(models.Model):
@@ -12,6 +16,10 @@ class Category(models.Model):
                                   on_delete=models.CASCADE,
                                   related_name='categories',
                                   verbose_name='Раздел')
+    visible = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Theme(models.Model):
@@ -24,11 +32,14 @@ class Theme(models.Model):
                                on_delete=models.CASCADE,
                                related_name='themes',
                                verbose_name='Автор')
-    first_post = models.OneToOneField('Post',
-                                      on_delete=models.CASCADE,
-                                      related_name='themes',
-                                      verbose_name='Первый пост')
     visible = models.BooleanField(default=False)
+
+    @property
+    def first_post(self) -> 'Post':
+        return self.posts.order_by('-send_date').first()
+
+    def __str__(self):
+        return self.name
 
 
 class Post(models.Model):
@@ -44,3 +55,17 @@ class Post(models.Model):
     send_date = models.DateTimeField(auto_now_add=True)
     edit_date = models.DateTimeField(auto_now=True)
     visible = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.body[:48]
+
+
+class PostImage(models.Model):
+    image = models.ImageField(upload_to='posts/%Y/%m/%d/')
+    post = models.ForeignKey(Post,
+                             on_delete=models.CASCADE,
+                             related_name='images')
+    visible = models.BooleanField()
+
+    def __str__(self):
+        return self.image

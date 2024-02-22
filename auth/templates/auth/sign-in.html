@@ -17,6 +17,8 @@
                 {{ field }}
             </p>
         {% endfor %}
+
+        {{ form.errors }}
         <input class="btn btn-success" type="submit" value="Вход">
     </form>
 {% endblock %}
